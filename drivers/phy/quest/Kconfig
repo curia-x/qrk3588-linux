@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: GPL-2.0-only
+
+config PHY_QRK3588_COMBO
+	tristate "Quest QRK3588 Combo PIPE PHY in PCIe mode"
+	depends on OF && (ARCH_QRK3588 || COMPILE_TEST)
+	select GENERIC_PHY
+	select MFD_SYSCON
+	select RESET_CONTROLLER
+	help
+	  Enable the Combo PIPE PHYs connected to the QRK3588 single-lane
+	  PCIe controllers. The driver manages PHY clocks, resets and routing.

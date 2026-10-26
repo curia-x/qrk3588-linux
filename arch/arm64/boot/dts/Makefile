@@ -28,6 +28,7 @@ subdir-y += microchip
 subdir-y += nuvoton
 subdir-y += nvidia
 subdir-y += qcom
+subdir-y += quest
 subdir-y += realtek
 subdir-y += renesas
 subdir-y += rockchip

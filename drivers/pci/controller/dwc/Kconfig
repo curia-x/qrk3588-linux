@@ -26,6 +26,18 @@ config PCIE_DW_EP
 	bool
 	select PCIE_DW
 
+config PCIE_QRK3588
+	bool "Quest QRK3588 PCIe controller"
+	depends on ARCH_QRK3588 || COMPILE_TEST
+	depends on PCI_MSI
+	select MFD_SYSCON
+	select PCIE_DW_HOST
+	select RESET_CONTROLLER
+	select GENERIC_PHY
+	help
+	  Enable host-mode support for the DesignWare PCIe controllers on
+	  Quest QRK3588. Each controller uses a separate generic PHY provider.
+
 config PCIE_AL
 	bool "Amazon Annapurna Labs PCIe controller"
 	depends on OF && (ARM64 || COMPILE_TEST)

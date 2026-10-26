@@ -33,6 +33,16 @@ menuconfig COMMON_CLK
 
 if COMMON_CLK
 
+config COMMON_CLK_QRK3588
+	bool "Quest QRK3588 clock controller"
+	depends on ARCH_QRK3588 || COMPILE_TEST
+	default ARCH_QRK3588
+	help
+	  Support the clock controller found on the Quest QRK3588 SoC. It
+	  provides the clocks used by the eMMC, GPIO and PCIe controllers,
+	  including the clocks located in the main CRU, PHP-top CRU and
+	  PMU1 CRU register regions.
+
 config COMMON_CLK_WM831X
 	tristate "Clock driver for WM831x/2x PMICs"
 	depends on MFD_WM831X

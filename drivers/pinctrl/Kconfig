@@ -693,6 +693,18 @@ config PINCTRL_RP1
 	  Enable the gpio and pinctrl/mux driver for RaspberryPi RP1
 	  multi function device.
 
+config PINCTRL_QRK3588
+	bool "Quest QRK3588 pin controller"
+	depends on ARCH_QRK3588 || COMPILE_TEST
+	depends on OF
+	select GENERIC_PINCONF
+	select GENERIC_PINCTRL_GROUPS
+	select GENERIC_PINMUX_FUNCTIONS
+	help
+	  Enable pin multiplexing and configuration support for the Quest
+	  QRK3588 platform. The driver provides UART2 M0 and eMMC pin groups,
+	  and switches individual pads to GPIO through pinctrl GPIO ranges.
+
 source "drivers/pinctrl/actions/Kconfig"
 source "drivers/pinctrl/airoha/Kconfig"
 source "drivers/pinctrl/aspeed/Kconfig"

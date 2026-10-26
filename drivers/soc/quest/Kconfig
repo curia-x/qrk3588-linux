@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: GPL-2.0-only
+
+config QRK3588_GIC_DIAGNOSTICS
+	bool "QRK3588 GIC-600 RAS diagnostics"
+	depends on ARCH_QRK3588
+	depends on DEBUG_KERNEL
+	help
+	  Read and report the ITS command-queue registers and GIC-600 RAS
+	  records after early interrupt controller initialization. Requires
+	  firmware to grant Non-secure access to GICT registers. This is
+	  intended for controlled bring-up only and must remain disabled in
+	  production images.

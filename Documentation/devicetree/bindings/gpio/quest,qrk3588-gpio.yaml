@@ -1,0 +1,70 @@
+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/gpio/quest,qrk3588-gpio.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Quest QRK3588 GPIO Controller
+
+maintainers:
+  - ninozhang001@gmail.com
+
+description:
+  Each QRK3588 GPIO bank provides 32 controller lines. Some line numbers do
+  not have a corresponding pad and are excluded with gpio-reserved-ranges.
+  GPIO-to-pad mappings are described by gpio-ranges because GPIO2 is not
+  entirely linear.
+
+properties:
+  compatible:
+    const: quest,qrk3588-gpio
+
+  reg:
+    maxItems: 1
+
+  clocks:
+    maxItems: 1
+
+  clock-names:
+    const: pclk
+
+  quest,bank-id:
+    $ref: /schemas/types.yaml#/definitions/uint32
+    minimum: 0
+    maximum: 4
+    description: GPIO bank number used for hardware line validation
+
+  gpio-controller: true
+
+  '#gpio-cells':
+    const: 2
+
+  gpio-ranges: true
+
+  gpio-reserved-ranges: true
+
+required:
+  - compatible
+  - reg
+  - clocks
+  - clock-names
+  - quest,bank-id
+  - gpio-controller
+  - '#gpio-cells'
+  - gpio-ranges
+
+additionalProperties: false
+
+examples:
+  - |
+    gpio@fec20000 {
+        compatible = "quest,qrk3588-gpio";
+        reg = <0xfec20000 0x10000>;
+        clocks = <&cru 6>;
+        clock-names = "pclk";
+        quest,bank-id = <1>;
+        gpio-controller;
+        #gpio-cells = <2>;
+        gpio-ranges = <&pinctrl 0 32 32>;
+    };
+...

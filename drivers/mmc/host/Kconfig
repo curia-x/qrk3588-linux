@@ -160,6 +160,17 @@ config MMC_SDHCI_PLTFM
 
 	  If unsure, say N.
 
+config MMC_SDHCI_QRK3588
+	tristate "Quest QRK3588 eMMC controller"
+	depends on ARCH_QRK3588 || COMPILE_TEST
+	depends on OF && COMMON_CLK
+	depends on MMC_SDHCI_PLTFM
+	select MFD_SYSCON
+	help
+	  Enable the independently implemented QRK3588 eMMC platform driver.
+	  Uses generic SDHCI with CRU card-clock control and SDMA at up to
+	  24 MHz. DDR, HS200, HS400 and command queuing are not supported.
+
 config MMC_SDHCI_OF_ARASAN
 	tristate "SDHCI OF support for the Arasan SDHCI controllers"
 	depends on MMC_SDHCI_PLTFM

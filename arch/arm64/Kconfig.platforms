@@ -332,6 +332,16 @@ config ARCH_QCOM
 	help
 	  This enables support for the ARMv8 based Qualcomm chipsets.
 
+config ARCH_QRK3588
+	bool "Quest QRK3588 platform"
+	select COMMON_CLK_QRK3588
+	select GPIO_QRK3588
+	select GPIOLIB
+	select PINCTRL
+	select PINCTRL_QRK3588
+	help
+	  This enables support for the ARMv8 based QRK3588 SoC.
+
 config ARCH_REALTEK
 	bool "Realtek Platforms"
 	select RESET_CONTROLLER

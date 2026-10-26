@@ -40,6 +40,7 @@ obj-$(CONFIG_GENERIC_PHY)		+= allwinner/	\
 					   mscc/	\
 					   nuvoton/	\
 					   qualcomm/	\
+					   quest/	\
 					   ralink/	\
 					   realtek/	\
 					   renesas/	\

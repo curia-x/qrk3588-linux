@@ -1641,6 +1641,15 @@ config GPIO_QIXIS_FPGA
 	  integrated on some NXP Layerscape boards such as LX2160ARDB and
 	  LS1046AQDS.
 
+config GPIO_QRK3588
+	bool "Quest QRK3588 GPIO support"
+	depends on ARCH_QRK3588 || COMPILE_TEST
+	depends on OF
+	help
+	  Enable GPIO support for the five banks in the Quest QRK3588 SoC.
+	  The driver uses gpiolib and pinctrl GPIO ranges for ownership and
+	  mux control.
+
 config GPIO_RC5T583
 	bool "RICOH RC5T583 GPIO"
 	depends on MFD_RC5T583

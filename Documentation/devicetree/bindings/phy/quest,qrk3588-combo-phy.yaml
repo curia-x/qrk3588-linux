@@ -1,0 +1,90 @@
+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/phy/quest,qrk3588-combo-phy.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Quest QRK3588 Combo PIPE PHY
+
+maintainers:
+  - ninozhang001@gmail.com
+
+description: |
+  The single-lane Combo PIPE PHYs supply the PCIe controllers. Each PHY
+  owns its internal registers, PIPE GRF, reference clock and local resets.
+  This binding currently describes operation in PCIe mode.
+
+properties:
+  compatible:
+    const: quest,qrk3588-combo-phy
+
+  reg:
+    items:
+      - description: PHY internal registers
+      - description: PIPE PHY GRF registers
+
+  reg-names:
+    items:
+      - const: phy
+      - const: grf
+
+  '#phy-cells':
+    const: 0
+
+  quest,php-grf:
+    $ref: /schemas/types.yaml#/definitions/phandle
+    description: |
+      PHP GRF syscon for the PHY connected through the PCIe1L0 routing mux.
+      When present, select this Combo PHY by clearing PCIESEL_CON bit 0.
+      Omit for a PHY with a direct connection to its PCIe controller.
+
+  clocks:
+    maxItems: 7
+
+  clock-names:
+    items:
+      - const: apb
+      - const: ref
+      - const: phy-ref
+      - const: pmalive
+      - const: pipe
+      - const: pipe-asic
+      - const: grf
+
+  resets:
+    maxItems: 3
+
+  reset-names:
+    items:
+      - const: grf
+      - const: apb
+      - const: core
+
+required:
+  - compatible
+  - reg
+  - reg-names
+  - '#phy-cells'
+  - clocks
+  - clock-names
+  - resets
+  - reset-names
+
+additionalProperties: false
+
+examples:
+  - |
+    phy@fee10000 {
+        compatible = "quest,qrk3588-combo-phy";
+        reg = <0xfee10000 0x10000>, <0xfd5c0000 0x10000>;
+        reg-names = "phy", "grf";
+        #phy-cells = <0>;
+        quest,php-grf = <&php_grf>;
+        clocks = <&cru 15>, <&cru 11>, <&cru 40>, <&cru 41>,
+                 <&cru 42>, <&cru 43>, <&cru 44>;
+        clock-names = "apb", "ref", "phy-ref", "pmalive", "pipe",
+                      "pipe-asic", "grf";
+        resets = <&cru 9>, <&cru 10>, <&cru 11>;
+        reset-names = "grf", "apb", "core";
+    };
+...
